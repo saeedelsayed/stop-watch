@@ -1,0 +1,24 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+
+void init(){
+	TCCR1A |= (1<<FOC1A) | (1<<WGM12);
+	OCR1A = 4645;
+
+}
+
+
+int main(void){
+
+	DDRC |= 0x0f;
+	DDRA |= 0x3f;
+	PORTC &= ~0x04;
+	PORTA |= 0x3f;
+
+
+	while(1){
+
+	}
+}

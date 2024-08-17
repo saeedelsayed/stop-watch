@@ -1,0 +1,87 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+unsigned char s1 =1;
+unsigned char s2 =3;
+unsigned char m1 =9;
+unsigned char m2 =5;
+unsigned char h1 =2;
+unsigned char h2 =7;
+
+
+
+
+
+
+void init(){
+
+	DDRC |= 0x0f;
+	DDRA |= 0x3f;
+	TCCR1A |= (1<<FOC1A) | (1<<WGM12);
+	TCCR1B |= (1<<CS10) | (1<<CS12);
+	OCR1A = 1000;
+	OCR1B = 1000;
+	TIMSK |=  (1<<OCIE1B);
+	SREG |= (1<<7);
+
+}
+
+ISR(TIMER1_COMP_vect){
+	s1++;
+}
+
+void display(){
+
+	PORTA &= 0xc0;
+	PORTA |= 0x20;
+	PORTC &= 0xf0;
+	PORTC |= s1;
+	_delay_ms(2);
+
+	PORTA &=0xc0;
+	PORTA |= 0x10;
+	PORTC &= 0xf0;
+	PORTC |= s2;
+	_delay_ms(2);
+
+	PORTA &=0xc0;
+	PORTA |= 0x08;
+	PORTC &= 0xf0;
+	PORTC |= m1;
+	_delay_ms(2);
+
+	PORTA &=0xc0;
+	PORTA |= 0x04;
+	PORTC &= 0xf0;
+	PORTC |= m2;
+	_delay_ms(2);
+
+	PORTA &=0xc0;
+	PORTA |= 0x02;
+	PORTC &= 0xf0;
+	PORTC |= h1;
+	_delay_ms(2);
+
+	PORTA &=0xc0;
+	PORTA |= 0x01;
+	PORTC &= 0xf0;
+	PORTC |= h2;
+	_delay_ms(2);
+
+}
+
+
+
+int main(void){
+
+
+	init();
+
+
+	while(1){
+
+		display();
+
+	}
+}

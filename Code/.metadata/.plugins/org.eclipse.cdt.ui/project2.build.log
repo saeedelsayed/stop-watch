@@ -1,0 +1,40 @@
+23:16:22 **** Incremental Build of configuration Debug for project project2 ****
+make all 
+Building file: ../project2.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"project2.d" -MT"project2.o" -c -o "project2.o" "../project2.c"
+In file included from ../project2.c:3:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../project2.c
+ 
+Building target: project2.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,project2.map -mmcu=atmega32 -o "project2.elf"  ./project2.o   
+Finished building target: project2.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S project2.elf  >"project2.lss"
+Finished building: project2.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex project2.elf  "project2.hex"
+Finished building: project2.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 project2.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    5654 bytes (17.3% Full)
+(.text + .data + .bootloader)
+
+Data:         15 bytes (0.7% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+23:16:23 Build Finished. 0 errors, 1 warnings. (took 555ms)
+

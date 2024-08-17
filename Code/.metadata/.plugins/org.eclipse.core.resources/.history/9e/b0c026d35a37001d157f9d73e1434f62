@@ -1,0 +1,75 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+
+unsigned char s1 =1;
+unsigned char s2 =3;
+unsigned char m1 =9;
+unsigned char m2 =5;
+unsigned char h1 =2;
+unsigned char h2 =7;
+
+
+
+
+
+
+void init(){
+	TCCR1A |= (1<<FOC1A) | (1<<WGM12);
+	OCR1A = 4645;
+
+}
+
+void display(){
+	PORTC &= 0xf0;
+	PORTC |= s1;
+	PORTA &=0xc0;
+	PORTA |= 0x20;
+	_delay_ms(2);
+
+	PORTC &= 0xf0;
+	PORTC |= s2;
+	PORTA &=0xc0;
+	PORTA |= 0x10;
+	_delay_ms(2);
+
+	PORTC &= 0xf0;
+	PORTC |= m1;
+	PORTA &=0xc0;
+	PORTA |= 0x08;
+	_delay_ms(2);
+
+	PORTC &= 0xf0;
+	PORTC |= m2;
+	PORTA &=0xc0;
+	PORTA |= 0x04;
+	_delay_ms(2);
+
+	PORTC &= 0xf0;
+	PORTC |= h1;
+	PORTA &=0xc0;
+	PORTA |= 0x02;
+	_delay_ms(2);
+
+	PORTC &= 0xf0;
+	PORTC |= h2;
+	PORTA &=0xc0;
+	PORTA |= 0x01;
+	_delay_ms(2);
+
+}
+
+
+
+int main(void){
+
+	DDRC |= 0x0f;
+	DDRA |= 0x3f;
+	display();
+
+
+
+	while(1){
+
+	}
+}
